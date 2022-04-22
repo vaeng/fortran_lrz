@@ -1,7 +1,7 @@
 module mod_body
   implicit none
   private
-  public :: body
+  public :: body, set_body, print_body
 
   type :: body
      private
@@ -17,13 +17,11 @@ contains
     write(*,fmt='(''          velocity: '',3(e9.2))') this%vel
   end subroutine print_body
 
-  type(body) pure function set_body(mass, pos, vel) result(b)
+  type(body) function set_body(mass, pos, vel) result(b)
     real, intent(in) :: mass
     real, intent(in), dimension(3) :: pos, vel
-    b%mass = mass
-    b%vel = vel
-    b%pos = pos 
-  end function
+    b = body(mass, pos, vel)
+  end function set_body
 
 end module mod_body
 
